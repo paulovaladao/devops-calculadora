@@ -1,0 +1,32 @@
+name: Pipeline DevOps CI/CD
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  Continuous-Integration:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Baixar o código
+        uses: actions/checkout@v4
+      
+      - name: Configurar Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.10'
+          
+      - name: Validar sintaxe da Calculadora (CI)
+        run: python -m py_compile calculadora.py
+
+  Continuous-Delivery:
+    needs: Continuous-Integration
+    runs-on: ubuntu-latest
+    steps:
+      - name: Baixar o código
+        uses: actions/checkout@v4
+        
+      - name: Simular Deploy para Producao (CD)
+        run: echo "Preparando para empacotar e entregar a calculadora na produção de forma automatizada!"
