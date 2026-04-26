@@ -30,3 +30,10 @@ jobs:
         
       - name: Simular Deploy para Producao (CD)
         run: echo "Preparando para empacotar e entregar a calculadora na produção de forma automatizada!"
+
+      - name: Notificar Discord (Alerta)
+        if: always()
+        run: |
+          curl -H "Content-Type: application/json" \
+          -d '{"content": "🚀 Alerta DevOps: O pipeline da Calculadora acabou de rodar no GitHub Actions!"}' \
+          ${{ secrets.DISCORD_WEBHOOK }}
