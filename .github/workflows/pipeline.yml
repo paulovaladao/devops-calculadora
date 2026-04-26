@@ -21,6 +21,9 @@ jobs:
       - name: Validar sintaxe da Calculadora (CI)
         run: python -m py_compile calculadora.py
 
+      - name: Executar Testes Unitarios
+        run: python -m unittest test_calculadora.py
+
   Continuous-Delivery:
     needs: Continuous-Integration
     runs-on: ubuntu-latest
